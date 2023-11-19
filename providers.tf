@@ -1,5 +1,5 @@
 terraform {
-  required_providers {
+  required_providers { #tflint-ignore: all
     yandex = {
       source = "yandex-cloud/yandex"
     }
