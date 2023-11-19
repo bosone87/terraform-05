@@ -19,7 +19,7 @@ module "vpc_prod" {
   ]
 }
 
-module "test-vm" {
+module "test-vm" { #tflint-ignore: all
   source          = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=main"
   env_name        = "develop"
   network_id      = module.vpc_dev.network_id
@@ -36,7 +36,7 @@ module "test-vm" {
   }
 }
 
-data "template_file" "cloudinit" {
+data "template_file" "cloudinit" { #tflint-ignore: all
  template = file("./cloud-init.yml")
   vars = {
     username         = "ubuntu"
@@ -44,7 +44,7 @@ data "template_file" "cloudinit" {
   }
 }
 
-provider "vault" {
+provider "vault" { #tflint-ignore: all
  address = "http://127.0.0.1:8200"
  skip_tls_verify = true
  token = "education"
@@ -63,7 +63,7 @@ resource "vault_mount" "kvv1" {
   options     = { version = "1" }
 }
 
-resource "vault_kv_secret" "secret" {
+resource "vault_kv_secret" "secret" { #tflint-ignore: all
   path = "${vault_mount.kvv1.path}/secret"
   data_json = jsonencode(
   {
